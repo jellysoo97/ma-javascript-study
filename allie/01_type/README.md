@@ -59,7 +59,7 @@
 
 - 전역 변수 체크하기
 
-1. typeof 안전가드 : typeof 선언되지 않은 변수 -> 브라우저가 오류 처리하지 않음 -> 이걸 이용해서 선언되지 않은 변수인지 체크할 때 유용
+1. typeof 안전가드 : typeof 선언되지 않은 변수 -> 브라우저가 오류 처리하지 않음 -> 이걸 이용해서 선언되지 않은 변수에 사용하기 좋음
 
 ```
   // error, DEBUG는 선언되지 않음
@@ -67,7 +67,7 @@
     console.log("start debug mode")
   }
 
-  // good
+  // good, DEBUG가 선언되었으면 debug mode 시작
   if (typeof DEBUG !== "undefined") {
     console.log("start debug mode")
   }
