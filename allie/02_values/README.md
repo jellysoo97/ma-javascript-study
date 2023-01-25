@@ -80,3 +80,24 @@
 
   addElements(4, 5, 6);
 ```
+
+## 2.2 문자열
+
+- 문자열 = 문자의 배열 ? X
+- 문자열 = `불변값` , 배열 = `가변값`
+
+1. 문자열 메소드는 원본을 바로 변경하지 않고 항상 새로운 문자열을 생성한 후 반환 vs 배열은 원본을 바로 수정
+
+```
+  var a = "foo"
+  a.toUpperCase()   // return "FOO"
+  a   // "foo"
+  var c = a.toUpperCase()
+  c   // "FOO"
+
+  var b = ["foo"]
+  b.push("!")   // return 2
+  b   // ["foo", "!"]
+```
+
+2. 문자열은 불변값이라 배열의 메소드를 쓸 수 없음
