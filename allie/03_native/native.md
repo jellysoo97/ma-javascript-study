@@ -134,4 +134,55 @@
 
 2. `new Error()`
 
--
+- error 객체 생성
+- `throw 연산자`와 함께 사용
+  - throw 연산자 : 에러를 발생시킴 -> 에러 발생 시 제어 흐름은 현재 함수의 실행이 중지되고 콜스택의 첫 번째 `catch` 블록으로 전달
+
+```
+  function getRectArea(width, height) {
+  if (isNaN(width) || isNaN(height)) {
+    throw new Error('Parameter is not a number!');
+  }
+}
+
+try {
+  getRectArea(3, 'A');
+} catch (e) {
+  console.error(e);
+  // Expected output: Error: Parameter is not a number!
+}
+```
+
+### 3.4.4 Symbol()
+
+- ES6에서 처음 선보인 새로운 원시 값 타입
+- `충돌 염려 없이 객체 프로퍼티로 사용 가능한 특별한 '유일 값'`
+- 프로그램 코드나 개발자 콘솔 창에서 심벌의 실제 값을 보거나 접근하는 건 불가능, 객체도 아님
+- 실제로 출력해보면 `Symbol`로 나옴
+- 직접 정의하려면 `Symbol()` 네이티브 사용
+- `new 붙이면 에러`
+
+```
+  var sym = Symbol('my own symbol')
+  sym   // Symbol(my own symbol)
+  sym.toString()    // "Symbol(my own symbol)"
+  typeof sym    // "symbol"
+```
+
+### 3.4.5 네이티브 프로토타입
+
+- 내장 네이티브 생성자는 각자의 `prototype 객체`를 가진다
+- `해당 객체의 하위 타입별로 고유한 로직이 담겨 있음`
+- 예를 들어, 모든 String 객체는 String.prototype 객체에 정의된 메서드에 접근할 수 있음
+  > 1. String.prototype.indexOf() : 문자열에서 특정 문자의 위치 검색
+  > 2. String.prototype.charAt() : 문자열에서 특정 위치의 문자를 반환
+  > 3. String.prototype.substr(), String.prototype.slice() : 문자열의 일부를 새로운 문자열로 추출
+  > 4. String.prototype.trim() : 앞/뒤 공란이 제거된 새로운 문자열 생성
+- 수정이 일어나면 `늘 기존값으로부터 새로운 값을 생성`
+- Number.prototype.toFixed(), Array.prototype.concat() 등 각 생성자 프로토타입마다 자신의 타입에 적합한 기능이 구현되어 있음
+
+## 3.5 정리하기
+
+- 자바스크립트는 원시값을 감싸는 객체 래퍼 = 네이티브(String, Numbner, Boolean 등)를 제공
+- 각 네이티브는 타입별로 쓸만한 프로토타입이 구현되어 있어 편리함
+- "abc" -> 단순 스칼라 원시값 -> "abc".length or "abc".prototype.trim() 호출 -> 자바스크립트가 자동으로 "abc"를 String()으로 '박싱' -> 필요한 프로퍼티와 메서드를 쓸 수 있는 것
