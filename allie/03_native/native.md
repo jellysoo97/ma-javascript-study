@@ -15,7 +15,7 @@
 10. Symbol()
 11. 등등..
 
-- String() : 문자열을 감싸는 wrapper 객체를 생성
+- `String()` : 문자열을 감싸는 wrapper 객체를 생성
 
 ```
   var test = new String("test")   // 원시값 "test"를 감싼 객체 래퍼
@@ -74,3 +74,64 @@
 ---
 
 ## 3.4 네이티브, 나는 생성자다
+
+> - 생성자 함수: js에서 객체를 생성하기 위해 사용되는 특수한 함수
+>   - Date 객체 생성 : new 연산자 + Date() 생성자 함수
+> - js는 Array, Boolean, Error, Function, Number, Date와 같은 여러 내장 생성자가 제공
+
+- 확실히 필요해서 쓰는게 아니라면 생성자는 가급적 쓰지 않는 편이 좋음 -> 오류가 많이남
+
+### 3.4.1 Array()
+
+```
+  var a = new Array(1, 2, 3)
+  a   // [1, 2, 3]
+
+  var b = [1, 2, 3]
+  b   // [1, 2, 3]
+```
+
+- `인자가 숫자 하나면 배열의 크기를 미리 정하는 기능` -> 해당 숫자가 원소가 되는 배열을 생성하는게 아님
+- `이상하다`
+  - 빈 슬롯이지만 length는 1이상인 경우 발생
+  - 브라우저마다 다름
+
+```
+  // 크롬 기준
+  var a = new Array(2)
+
+  a.length    // 2
+  a   // [empty x 2]
+
+  var test1 = new Array(3)
+  var b = [undefined, undefined, undefined]
+  var c = []
+  c.length = 3
+
+  a   // [empty x 3], length: 3
+  b   // [undefined, undefined, undefined], length: 3
+  c   // [empty x 3], length: 3
+```
+
+### 3.4.2 Object(), Function() and RegExp()
+
+- 이 생성자들 또한 `선택적`
+- `new Object()` : 사용할 일이 거의 없음, 리터럴 형태로 한번에 여러 프로퍼티 지정 가능하니까 굳이 싶음
+  - var a = {name: 'allie', age: 20}
+- `new Function()` : 함수의 인자나 내용을 동적으로 정의해야 할 때만 드물게 사용
+- `new RegExp()` : `리터럴 형식으로 정의할 것을 적극 권장`
+  - 가독성이 좋음
+  - 성능상 이점 -> 자바스크립트 엔진이 실행 전 정규 표현식을 미리 컴파일 후 캐시
+
+### 3.4.3 Date() and Error()
+
+- `리터럴 형식이 없어서 유용`
+
+1. `new Date()`
+
+- 날짜/시각을 인자로 받음
+- 인자가 없으면 현재 날짜/시각으로 대체
+
+2. `new Error()`
+
+-
